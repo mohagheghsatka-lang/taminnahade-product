@@ -527,161 +527,256 @@
   #loginError{min-height:20px;margin-top:10px;color:var(--danger);font-size:12px;font-weight:600;text-align:center;}
   body:not(.locked) #loginOverlay{display:none;}
 
-  /* Cover page: strictly HIDDEN in website browser view */
-  .pdf-cover-page{
-    display: none !important;
-  }
-  .repeated-header{
-    display: none !important;
-  }
-
-  @media print{
-    .toolbar, #addForm, #addFormOverlay, .del-btn, .global-toggles, .img-upload-label, .editor-toolbar, .card-actions, .editor-modal, #loginOverlay, .brand-chip, .drag-handle, .logo-placeholder-label{display:none !important;}
-    body{background:#fff;}
-    .pdf-cover-page{
-      display: block !important;
-      width: 100%;
-      page-break-after: always !important;
-      break-after: page !important;
-    }
-    .pdf-cover-page img{
-      display: block;
-      width: 100%;
-      height: auto;
-    }
+  .pdf-export-root {
+    width: 794px;
+    margin: 0 auto;
+    background: #fff;
+    color: var(--ink);
+    direction: rtl;
+    font-family: 'Vazirmatn', sans-serif;
+    box-sizing: border-box;
   }
 
-  /* ---------- PDF Export in body.exporting ---------- */
-  body.exporting{
-    background: #fff !important;
-  }
-  body.exporting .toolbar,
-  body.exporting #addForm,
-  body.exporting #addFormOverlay,
-  body.exporting .del-btn,
-  body.exporting .global-toggles,
-  body.exporting .img-upload-label,
-  body.exporting .editor-toolbar,
-  body.exporting .card-actions,
-  body.exporting .editor-modal,
-  body.exporting #loginOverlay,
-  body.exporting .brand-chip,
-  body.exporting .drag-handle,
-  body.exporting .logo-placeholder-label{
-    display: none !important;
-  }
-  body.exporting #sheet{
-    background: #fff !important;
-    padding: 0 4px 4px !important;
+  .pdf-export-root .pdf-page {
+    width: 794px;
+    height: 1110px;
+    max-height: 1110px;
+    overflow: hidden;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 14px 22px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-after: always;
+    break-after: page;
   }
 
-  /* Cover page in PDF export */
-  body.exporting .pdf-cover-page{
-    display: block !important;
-    width: 100% !important;
-    page-break-after: always !important;
-    break-after: page !important;
-    margin-bottom: 0 !important;
-  }
-  body.exporting .pdf-cover-page img{
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
+  .pdf-export-root .pdf-page:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
   }
 
-  /* Repeated header at the top of each PDF page */
-  body.exporting .brand-header{
-    padding: 10px 18px !important;
-    margin-bottom: 10px !important;
-    border-radius: 10px !important;
-  }
-  body.exporting .brand-header .org-name{
-    font-size: 16.5px !important;
-  }
-  body.exporting .brand-header .contact{
-    font-size: 12px !important;
-    line-height: 1.75 !important;
-  }
-  body.exporting .logo-box img{
-    max-height: 44px !important;
-    max-width: 140px !important;
-  }
-  body.exporting .repeated-header{
-    display: flex !important;
-    margin-top: 0 !important;
-    page-break-before: always !important;
-    break-before: page !important;
+  .pdf-export-root .pdf-page-cover {
+    width: 794px;
+    height: 1110px;
+    max-height: 1110px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background: #1c7a4f;
   }
 
-  /* Compact card styling to guarantee 4 products fit completely on every A4 page */
-  body.exporting .card{
-    padding: 7px 12px !important;
-    margin-bottom: 5px !important;
-    border-radius: 6px !important;
-    border: 1px solid var(--line) !important;
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-  body.exporting .card h3{
-    font-size: 13px !important;
-    margin: 0 0 3px !important;
-    padding-bottom: 2px !important;
-  }
-  body.exporting .brand-chip{
-    font-size: 9px !important;
-    padding: 1px 5px !important;
-  }
-  body.exporting .card p.desc{
-    font-size: 8.5px !important;
-    line-height: 1.45 !important;
-    margin: 0 0 4px !important;
-  }
-  body.exporting table.spec{
-    font-size: 8.5px !important;
-    margin-bottom: 4px !important;
-  }
-  body.exporting table.spec th,
-  body.exporting table.spec td{
-    padding: 2px 3px !important;
-  }
-  body.exporting .price-line{
-    font-size: 11px !important;
-    gap: 4px !important;
-  }
-  body.exporting .price-line input{
-    width: auto !important;
-    font-size: 11.5px !important;
-    font-weight: 800 !important;
-    padding: 0 !important;
-    border: none !important;
-    background: transparent !important;
-    text-align: right !important;
-    box-shadow: none !important;
-  }
-  body.exporting .prices, body.exporting .prices-block{
-    gap: 10px !important;
-  }
-  body.exporting .size-badge{
-    font-size: 9.5px !important;
-    padding: 2px 7px !important;
-  }
-  body.exporting .img-col{
-    flex: 0 0 76px !important;
-    width: 76px !important;
-  }
-  body.exporting .img-box{
-    width: 76px !important;
-    height: 76px !important;
-    border-radius: 6px !important;
-  }
-  body.exporting .card-footer{
-    gap: 4px !important;
+  .pdf-export-root .pdf-page-cover img {
+    width: 794px;
+    height: 1110px;
+    object-fit: fill;
+    display: block;
   }
 
-  /* Page break */
-  .pdf-page-break{
-    page-break-after: always !important;
-    break-after: page !important;
+  .pdf-export-root .pdf-brand-header {
+    background: linear-gradient(90deg, var(--brand-dark), var(--brand));
+    color: #fff;
+    border-radius: 12px;
+    padding: 10px 20px;
+    direction: ltr;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: 72px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+
+  .pdf-export-root .pdf-brand-header .contact {
+    font-size: 11.5px;
+    line-height: 1.7;
+    direction: ltr;
+    text-align: left;
+    flex: 0 0 auto;
+  }
+  .pdf-export-root .pdf-brand-header .contact div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pdf-export-root .pdf-brand-header .org-name {
+    font-size: 17px;
+    margin: 0;
+    font-weight: 800;
+    direction: rtl;
+    text-align: right;
+    flex: 0 0 auto;
+  }
+  .pdf-export-root .pdf-brand-header .logo-slot {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pdf-export-root .pdf-brand-header .logo-box img {
+    max-height: 48px;
+    max-width: 150px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .pdf-export-root .pdf-page-cards {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .pdf-export-root .pdf-page-cards.full-page {
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .pdf-export-root .pdf-card {
+    height: 242px;
+    max-height: 242px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .pdf-export-root .pdf-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .pdf-export-root .pdf-card h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--brand-dark);
+    margin: 0;
+    padding-bottom: 2px;
+    border-bottom: 2px solid var(--brand-light);
+    display: inline-block;
+  }
+  .pdf-export-root .pdf-brand-chip {
+    font-size: 10.5px;
+    background: #eef6f1;
+    color: var(--brand-dark);
+    border: 1px solid #cfe3d5;
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+
+  .pdf-export-root .pdf-card-body {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex: 1 1 auto;
+  }
+  .pdf-export-root .pdf-card-main {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .pdf-export-root .pdf-card p.desc {
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0 0 6px;
+    direction: rtl;
+    text-align: right;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .pdf-export-root table.pdf-spec {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5px;
+    margin-bottom: 6px;
+  }
+  .pdf-export-root table.pdf-spec th,
+  .pdf-export-root table.pdf-spec td {
+    border: 1px solid var(--line);
+    padding: 3.5px 5px;
+    text-align: center;
+  }
+  .pdf-export-root table.pdf-spec th {
+    background: #f2f7f4;
+    color: var(--brand-dark);
+    font-weight: 700;
+  }
+  .pdf-export-root .pdf-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .pdf-export-root .pdf-prices {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pdf-export-root .pdf-price-line {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--brand-dark);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pdf-export-root .pdf-price-line.wholesale {
+    color: #8a5a10;
+  }
+  .pdf-export-root .pdf-price-val {
+    font-size: 13.5px;
+    font-weight: 800;
+  }
+  .pdf-export-root .pdf-size-badge {
+    background: var(--brand-dark);
+    color: #fff;
+    font-weight: 700;
+    font-size: 11px;
+    border-radius: 999px;
+    padding: 3px 12px;
+  }
+
+  .pdf-export-root .pdf-img-col {
+    flex: 0 0 115px;
+    width: 115px;
+    height: 115px;
+  }
+  .pdf-export-root .pdf-img-box {
+    width: 115px;
+    height: 115px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f2f7f4;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pdf-export-root .pdf-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .pdf-export-root .pdf-img-box .placeholder {
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-align: center;
   }
 </style>
 </head>
@@ -713,10 +808,6 @@
   </div>
 
   <div id="sheet">
-
-    <div class="pdf-cover-page" id="pdfCoverPage">
-      <img src="cover.jpg" alt="جلد کاتالوگ محصولات">
-    </div>
 
     <div class="brand-header">
       <div class="contact">
@@ -1530,71 +1621,181 @@
     }
   });
 
+  function preloadImage(url) {
+    return new Promise((resolve) => {
+      if (!url) return resolve(null);
+      const img = new Image();
+      let resolved = false;
+      const done = () => { if (!resolved) { resolved = true; resolve(img); } };
+      img.onload = done;
+      img.onerror = done;
+      img.src = url;
+      if (img.complete) done();
+      setTimeout(done, 2000);
+    });
+  }
+
   // ---------- export to PDF ----------
-  document.getElementById('exportBtn').addEventListener('click', ()=>{
+  document.getElementById('exportBtn').addEventListener('click', async () => {
     const exportBtn = document.getElementById('exportBtn');
     exportBtn.disabled = true;
     exportBtn.textContent = 'در حال ساخت PDF...';
     closeEditor();
 
-    const sheet = document.getElementById('sheet');
-    const hiddenCards = [];
+    let exportRoot = null;
+    try {
+      // 1. Filter visible products (by selected brand and hidden_pdf status)
+      const visibleProducts = products.filter(p => {
+        const brandMatch = selectedBrands.size === 0 || selectedBrands.has((p.brand || 'عمومی').trim() || 'عمومی');
+        return brandMatch && !p.hidden_pdf;
+      });
 
-    document.querySelectorAll('#cards .card').forEach(card=>{
-      const idx = Number(card.querySelector('.hidden-pdf-toggle')?.dataset.idx);
-      const p = products[idx];
-      if(p && p.hidden_pdf){
-        hiddenCards.push(card);
-        card.style.display = 'none';
+      if (visibleProducts.length === 0) {
+        alert('هیچ محصولی برای خروجی PDF انتخاب نشده است.');
+        exportBtn.disabled = false;
+        exportBtn.textContent = 'دریافت PDF';
+        return;
       }
-    });
 
-    document.body.classList.add('exporting');
+      // Preload cover and active logo
+      const curLogoImg = document.querySelector('#logoBox img');
+      const logoSrc = curLogoImg ? curLogoImg.src : 'logo.png';
+      await Promise.all([
+        preloadImage('cover.jpg'),
+        preloadImage(logoSrc)
+      ]);
 
-    const PER_PAGE = 4;
-    const headerEl = document.querySelector('.brand-header');
-    const printedCards = [...document.querySelectorAll('#cards .card')]
-      .filter(card => card.style.display !== 'none');
-    const injectedHeaders = [];
+      // 2. Build PDF DOM container
+      exportRoot = document.createElement('div');
+      exportRoot.className = 'pdf-export-root';
 
-    printedCards.forEach((card, i)=>{
-      if((i + 1) % PER_PAGE === 0 && i !== printedCards.length - 1){
-        const clone = headerEl.cloneNode(true);
-        clone.classList.add('repeated-header');
-        clone.removeAttribute('id');
-        clone.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
-        clone.querySelectorAll('input').forEach(el=>el.remove());
+      // Page 1: Catalog Cover Page
+      const coverPage = document.createElement('div');
+      coverPage.className = 'pdf-page pdf-page-cover';
+      coverPage.innerHTML = `<img src="cover.jpg" alt="جلد کاتالوگ محصولات">`;
+      exportRoot.appendChild(coverPage);
 
-        const curLogo = document.querySelector('#logoBox img');
-        const cloneLogo = clone.querySelector('.logo-box img');
-        if(curLogo && cloneLogo) cloneLogo.src = curLogo.src;
+      // Subsequent Product Pages (strictly 4 products per page)
+      const PER_PAGE = 4;
+      const numPages = Math.ceil(visibleProducts.length / PER_PAGE);
 
-        card.insertAdjacentElement('afterend', clone);
-        injectedHeaders.push(clone);
+      for (let p = 0; p < numPages; p++) {
+        const pageDiv = document.createElement('div');
+        pageDiv.className = 'pdf-page';
+
+        // Repeated Brand Header on every product page
+        pageDiv.innerHTML = `
+          <div class="pdf-brand-header">
+            <div class="contact">
+              <div>📞 021 - 910 123 23</div>
+              <div>🌐 www.taminnahade.com</div>
+            </div>
+            <div class="logo-slot">
+              <div class="logo-box">
+                <img src="${escapeHtml(logoSrc)}" alt="لوگو سازمان">
+              </div>
+            </div>
+            <h2 class="org-name">سازمان تأمین نهاده ایران</h2>
+          </div>
+        `;
+
+        const cardsContainer = document.createElement('div');
+        cardsContainer.className = 'pdf-page-cards';
+
+        const pageProducts = visibleProducts.slice(p * PER_PAGE, (p + 1) * PER_PAGE);
+        if (pageProducts.length === PER_PAGE) {
+          cardsContainer.classList.add('full-page');
+        }
+
+        pageProducts.forEach(prod => {
+          const card = document.createElement('div');
+          card.className = 'pdf-card';
+
+          const specHead = (prod.spec || []).map(s => `<th>${escapeHtml(s.label)}</th>`).join('');
+          const specBody = (prod.spec || []).map(s => `<td>${escapeHtml(s.value)}</td>`).join('');
+
+          const imgInner = prod.image
+            ? `<img src="${escapeHtml(prod.image)}" alt="${escapeHtml(prod.title)}">`
+            : `<div class="placeholder">بدون عکس</div>`;
+
+          const consumerPriceHtml = globalShowPrice
+            ? `<div class="pdf-price-line">
+                 <span class="price-label">مصرف‌کننده:</span>
+                 <span class="pdf-price-val">${escapeHtml(prod.price || '0')}</span>
+                 <span class="price-label">تومان</span>
+               </div>`
+            : '';
+
+          const wholesalePriceHtml = globalShowPrice2
+            ? `<div class="pdf-price-line wholesale">
+                 <span class="price-label">همکاری:</span>
+                 <span class="pdf-price-val">${escapeHtml(prod.price2 || '0')}</span>
+                 <span class="price-label">تومان</span>
+               </div>`
+            : '';
+
+          card.innerHTML = `
+            <div class="pdf-card-top">
+              <h3>${escapeHtml(prod.title)}</h3>
+              <span class="pdf-brand-chip">برند: ${escapeHtml(prod.brand || 'عمومی')}</span>
+            </div>
+            <div class="pdf-card-body">
+              <div class="pdf-card-main">
+                <p class="desc">${escapeHtml(rtlPunct(prod.desc))}</p>
+                <table class="pdf-spec">
+                  <thead><tr>${specHead || '<th>مشخصات</th>'}</tr></thead>
+                  <tbody><tr>${specBody || '<td>-</td>'}</tr></tbody>
+                </table>
+                <div class="pdf-card-footer">
+                  <div class="pdf-prices">
+                    ${consumerPriceHtml}
+                    ${wholesalePriceHtml}
+                  </div>
+                  <div class="pdf-size-badge">${escapeHtml(prod.size || '-')}</div>
+                </div>
+              </div>
+              <div class="pdf-img-col">
+                <div class="pdf-img-box">${imgInner}</div>
+              </div>
+            </div>
+          `;
+          cardsContainer.appendChild(card);
+        });
+
+        pageDiv.appendChild(cardsContainer);
+        exportRoot.appendChild(pageDiv);
       }
-    });
 
-    function cleanup(){
-      hiddenCards.forEach(card=>card.style.display='');
-      injectedHeaders.forEach(el=>el.remove());
-      document.body.classList.remove('exporting');
+      const sheet = document.getElementById('sheet');
+      if (sheet) sheet.style.display = 'none';
+      document.body.appendChild(exportRoot);
+      window.scrollTo(0, 0);
+
+      // Wait a moment for rendering and fonts
+      await new Promise(r => setTimeout(r, 150));
+
+      const opt = {
+        margin:       0,
+        filename:     'لیست-قیمت-تامین-نهاده-ایران.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: 'css' }
+      };
+
+      await html2pdf().set(opt).from(exportRoot).save();
+    } catch(err) {
+      console.error(err);
+      alert('خطا در ساخت PDF: ' + err.message);
+    } finally {
+      if (exportRoot && exportRoot.parentNode) {
+        exportRoot.parentNode.removeChild(exportRoot);
+      }
+      const sheet = document.getElementById('sheet');
+      if (sheet) sheet.style.display = '';
       exportBtn.disabled = false;
       exportBtn.textContent = 'دریافت PDF';
     }
-
-    const opt = {
-      margin:       [6, 8, 6, 8],
-      filename:     'لیست-قیمت-تامین-نهاده-ایران.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true },
-      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak:    { mode: ['css', 'legacy'] }
-    };
-
-    html2pdf().set(opt).from(sheet).save().then(cleanup).catch((err)=>{
-      cleanup();
-      alert('خطا در ساخت PDF: ' + err.message);
-    });
   });
 </script>
 </body>
