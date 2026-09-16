@@ -653,8 +653,8 @@
       </div>
       <div class="logo-slot" id="logoSlot">
         <div class="logo-box" id="logoBox">
-          <label class="logo-placeholder-label">
-            🖼 بارگذاری لوگو
+          <label class="logo-current-label" title="برای تغییر لوگو کلیک کنید">
+            <img src="logo.png" alt="لوگو سازمان">
             <input type="file" accept="image/*" id="logoInput">
           </label>
         </div>
@@ -918,24 +918,17 @@
 
   // ---------- header logo upload ----------
   const LOGO_STORAGE_KEY = 'taminnahade_logo';
+  const DEFAULT_LOGO = 'logo.png';
   const logoBox = document.getElementById('logoBox');
 
   function renderLogo(dataUrl){
-    if(dataUrl){
-      logoBox.innerHTML = `
-        <label class="logo-current-label" title="برای تغییر لوگو کلیک کنید">
-          <img src="${dataUrl}" alt="لوگو سازمان">
-          <input type="file" accept="image/*" id="logoInput">
-        </label>
-      `;
-    } else {
-      logoBox.innerHTML = `
-        <label class="logo-placeholder-label">
-          🖼 بارگذاری لوگو
-          <input type="file" accept="image/*" id="logoInput">
-        </label>
-      `;
-    }
+    const currentSrc = dataUrl || DEFAULT_LOGO;
+    logoBox.innerHTML = `
+      <label class="logo-current-label" title="برای تغییر لوگو کلیک کنید">
+        <img src="${currentSrc}" alt="لوگو سازمان">
+        <input type="file" accept="image/*" id="logoInput">
+      </label>
+    `;
     bindLogoInput();
   }
 
@@ -957,7 +950,7 @@
 
   let savedLogo = null;
   try { savedLogo = localStorage.getItem(LOGO_STORAGE_KEY); } catch(err){ savedLogo = null; }
-  renderLogo(savedLogo);
+  renderLogo(savedLogo || DEFAULT_LOGO);
 
   function escapeHtml(value){
     return String(value ?? '')
