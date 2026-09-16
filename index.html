@@ -527,147 +527,155 @@
   #loginError{min-height:20px;margin-top:10px;color:var(--danger);font-size:12px;font-weight:600;text-align:center;}
   body:not(.locked) #loginOverlay{display:none;}
 
-  @media print{
-    .toolbar, #addForm, #addFormOverlay, .del-btn, .global-toggles, .img-upload-label, .editor-toolbar, .card-actions, .editor-modal, #loginOverlay, .brand-chip, .drag-handle, .logo-placeholder-label{display:none !important;}
-    body{background:#fff;}
+  /* Cover page: strictly HIDDEN in website browser view */
+  .pdf-cover-page{
+    display: none !important;
   }
-  @media print{
-    .toolbar, #addForm, #addFormOverlay, .del-btn, .global-toggles, .img-upload-label, .editor-toolbar, .card-actions, .editor-modal, #loginOverlay, .brand-chip, .drag-handle, .logo-placeholder-label{display:none !important;}
-    body{background:#fff;}
+  .repeated-header{
+    display: none !important;
   }
 
-  /* ---------- PDF export dedicated layout ---------- */
-  #pdfExportRoot{display:none;}
-  body.exporting #pdfExportRoot{display:block !important; background:#fff;}
-  body.exporting #sheet,
+  @media print{
+    .toolbar, #addForm, #addFormOverlay, .del-btn, .global-toggles, .img-upload-label, .editor-toolbar, .card-actions, .editor-modal, #loginOverlay, .brand-chip, .drag-handle, .logo-placeholder-label{display:none !important;}
+    body{background:#fff;}
+    .pdf-cover-page{
+      display: block !important;
+      width: 100%;
+      page-break-after: always !important;
+      break-after: page !important;
+    }
+    .pdf-cover-page img{
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  /* ---------- PDF Export in body.exporting ---------- */
+  body.exporting{
+    background: #fff !important;
+  }
   body.exporting .toolbar,
   body.exporting #addForm,
   body.exporting #addFormOverlay,
+  body.exporting .del-btn,
+  body.exporting .global-toggles,
+  body.exporting .img-upload-label,
+  body.exporting .editor-toolbar,
+  body.exporting .card-actions,
   body.exporting .editor-modal,
-  body.exporting #loginOverlay{
-    display:none !important;
+  body.exporting #loginOverlay,
+  body.exporting .brand-chip,
+  body.exporting .drag-handle,
+  body.exporting .logo-placeholder-label{
+    display: none !important;
   }
-  body.exporting{background:#fff;}
+  body.exporting #sheet{
+    background: #fff !important;
+    padding: 0 4px 4px !important;
+  }
 
-  .pdf-page{
-    box-sizing:border-box;
-    width:100%;
-    max-width:820px;
-    margin:0 auto;
-    page-break-after:always;
-    break-after:page;
-    page-break-inside:avoid;
-    break-inside:avoid;
-    padding:0 2px 4px;
-    background:#fff;
+  /* Cover page in PDF export */
+  body.exporting .pdf-cover-page{
+    display: block !important;
+    width: 100% !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    margin-bottom: 0 !important;
   }
-  .pdf-page:last-child{
-    page-break-after:auto;
-    break-after:auto;
+  body.exporting .pdf-cover-page img{
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
   }
-  .pdf-page-cover{
-    padding:0;
-    margin:0;
+
+  /* Repeated header at the top of each PDF page */
+  body.exporting .brand-header{
+    padding: 10px 18px !important;
+    margin-bottom: 10px !important;
+    border-radius: 10px !important;
   }
-  .pdf-page-cover img{
-    display:block;
-    width:100%;
-    height:auto;
+  body.exporting .brand-header .org-name{
+    font-size: 16.5px !important;
   }
-  .pdf-page-header{
-    display:flex !important;
-    background:linear-gradient(90deg, var(--brand-dark), var(--brand)) !important;
-    color:#fff !important;
-    border-radius:12px !important;
-    padding:10px 18px !important;
-    margin-bottom:10px !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-    direction:ltr !important;
+  body.exporting .brand-header .contact{
+    font-size: 12px !important;
+    line-height: 1.75 !important;
   }
-  .pdf-page-header .org-name{
-    font-size:16.5px !important;
-    font-weight:800 !important;
-    margin:0 !important;
-    color:#fff !important;
-    direction:rtl !important;
-    text-align:right !important;
+  body.exporting .logo-box img{
+    max-height: 44px !important;
+    max-width: 140px !important;
   }
-  .pdf-page-header .contact{
-    font-size:12px !important;
-    line-height:1.75 !important;
-    color:#fff !important;
-    direction:ltr !important;
-    text-align:left !important;
+  body.exporting .repeated-header{
+    display: flex !important;
+    margin-top: 0 !important;
   }
-  .pdf-page-header .logo-slot{
-    flex:1 1 auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+
+  /* Compact card styling for clean A4 fit without overflow */
+  body.exporting .card{
+    padding: 10px 14px !important;
+    margin-bottom: 8px !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--line) !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
-  .pdf-page-header .logo-box img{
-    max-height:44px !important;
-    max-width:150px !important;
-    object-fit:contain !important;
-    display:block !important;
+  body.exporting .card h3{
+    font-size: 14.5px !important;
+    margin: 0 0 5px !important;
+    padding-bottom: 3px !important;
   }
-  .pdf-page .card{
-    padding:10px 14px !important;
-    margin-bottom:8px !important;
-    border-radius:10px !important;
-    border:1px solid var(--line) !important;
-    background:#fff !important;
-    page-break-inside:avoid !important;
-    break-inside:avoid !important;
+  body.exporting .card p.desc{
+    font-size: 9.8px !important;
+    line-height: 1.65 !important;
+    margin: 0 0 6px !important;
   }
-  .pdf-page .card h3{
-    font-size:14.5px !important;
-    margin:0 0 5px !important;
-    padding-bottom:3px !important;
+  body.exporting table.spec{
+    font-size: 9.5px !important;
+    margin-bottom: 6px !important;
   }
-  .pdf-page .card p.desc{
-    font-size:9.8px !important;
-    line-height:1.65 !important;
-    margin:0 0 6px !important;
+  body.exporting table.spec th,
+  body.exporting table.spec td{
+    padding: 3px 4px !important;
   }
-  .pdf-page table.spec{
-    font-size:9.5px !important;
-    margin-bottom:6px !important;
+  body.exporting .price-line{
+    font-size: 12px !important;
+    gap: 6px !important;
   }
-  .pdf-page table.spec th,
-  .pdf-page table.spec td{
-    padding:3px 4px !important;
+  body.exporting .price-line input{
+    width: auto !important;
+    font-size: 12.5px !important;
+    font-weight: 800 !important;
+    padding: 2px 4px !important;
+    border: none !important;
+    background: transparent !important;
+    text-align: right !important;
+    box-shadow: none !important;
   }
-  .pdf-page .img-col{
-    flex:0 0 92px !important;
-    width:92px !important;
+  body.exporting .prices, body.exporting .prices-block{
+    gap: 12px !important;
   }
-  .pdf-page .img-box{
-    width:92px !important;
-    height:92px !important;
-    border-radius:8px !important;
+  body.exporting .size-badge{
+    font-size: 10.5px !important;
+    padding: 3px 10px !important;
   }
-  .pdf-page .price-line{
-    font-size:12px !important;
-    gap:6px !important;
+  body.exporting .img-col{
+    flex: 0 0 92px !important;
+    width: 92px !important;
   }
-  .pdf-page .price-line input{
-    border:none !important;
-    background:transparent !important;
-    padding:0 !important;
-    width:auto !important;
-    font-size:12.5px !important;
-    font-weight:800 !important;
-    text-align:right !important;
-    box-shadow:none !important;
+  body.exporting .img-box{
+    width: 92px !important;
+    height: 92px !important;
+    border-radius: 8px !important;
   }
-  .pdf-page .size-badge{
-    font-size:10.5px !important;
-    padding:3px 10px !important;
+  body.exporting .card-footer{
+    gap: 6px !important;
   }
-  .pdf-page .card-footer{
-    gap:6px !important;
+
+  /* Page break */
+  .pdf-page-break{
+    page-break-after: always !important;
+    break-after: page !important;
   }
 </style>
 </head>
@@ -1517,108 +1525,72 @@
   });
 
   // ---------- export to PDF ----------
-  document.getElementById('exportBtn').addEventListener('click', async ()=>{
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
     const exportBtn = document.getElementById('exportBtn');
     exportBtn.disabled = true;
     exportBtn.textContent = 'در حال ساخت PDF...';
     closeEditor();
 
-    // 1. Get visible products that are not hidden from PDF
-    const visibleCards = [...document.querySelectorAll('#cards .card')].filter(card=>{
+    const sheet = document.getElementById('sheet');
+    const hiddenCards = [];
+
+    document.querySelectorAll('#cards .card').forEach(card=>{
       const idx = Number(card.querySelector('.hidden-pdf-toggle')?.dataset.idx);
       const p = products[idx];
-      return p && !p.hidden_pdf;
+      if(p && p.hidden_pdf){
+        hiddenCards.push(card);
+        card.style.display = 'none';
+      }
     });
 
-    if(visibleCards.length === 0){
-      alert('هیچ محصولی برای نمایش در PDF انتخاب نشده است.');
+    document.body.classList.add('exporting');
+
+    const PER_PAGE = 3;
+    const headerEl = document.querySelector('.brand-header');
+    const printedCards = [...document.querySelectorAll('#cards .card')]
+      .filter(card => card.style.display !== 'none');
+    const injectedHeaders = [];
+
+    printedCards.forEach((card, i)=>{
+      if((i + 1) % PER_PAGE === 0 && i !== printedCards.length - 1){
+        card.classList.add('pdf-page-break');
+        const clone = headerEl.cloneNode(true);
+        clone.classList.add('repeated-header');
+        clone.removeAttribute('id');
+        clone.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+        clone.querySelectorAll('input').forEach(el=>el.remove());
+
+        const curLogo = document.querySelector('#logoBox img');
+        const cloneLogo = clone.querySelector('.logo-box img');
+        if(curLogo && cloneLogo) cloneLogo.src = curLogo.src;
+
+        card.insertAdjacentElement('afterend', clone);
+        injectedHeaders.push(clone);
+      }
+    });
+
+    function cleanup(){
+      hiddenCards.forEach(card=>card.style.display='');
+      printedCards.forEach(card=>card.classList.remove('pdf-page-break'));
+      injectedHeaders.forEach(el=>el.remove());
+      document.body.classList.remove('exporting');
       exportBtn.disabled = false;
       exportBtn.textContent = 'دریافت PDF';
-      return;
     }
-
-    // 2. Clone the brand header template
-    const headerEl = document.querySelector('.brand-header');
-    const headerTemplate = headerEl.cloneNode(true);
-    const currentLogoImg = document.querySelector('#logoBox img');
-    const cloneLogoImg = headerTemplate.querySelector('.logo-box img');
-    if(currentLogoImg && cloneLogoImg){
-      cloneLogoImg.src = currentLogoImg.src;
-    }
-    headerTemplate.removeAttribute('id');
-    headerTemplate.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
-    headerTemplate.querySelectorAll('input').forEach(el=>el.remove());
-    headerTemplate.classList.add('pdf-page-header');
-
-    // 3. Create a dedicated print container
-    const pdfContainer = document.createElement('div');
-    pdfContainer.id = 'pdfExportRoot';
-
-    // Page 1: Cover page
-    const coverEl = document.getElementById('pdfCoverPage');
-    if(coverEl){
-      const coverPage = document.createElement('div');
-      coverPage.className = 'pdf-page pdf-page-cover';
-      const coverClone = coverEl.cloneNode(true);
-      coverClone.style.display = 'block';
-      coverClone.removeAttribute('id');
-      coverPage.appendChild(coverClone);
-      pdfContainer.appendChild(coverPage);
-    }
-
-    // Product pages: 4 cards per page, every page gets the header at top
-    const PER_PAGE = 4;
-    for(let i = 0; i < visibleCards.length; i += PER_PAGE){
-      const pageEl = document.createElement('div');
-      pageEl.className = 'pdf-page pdf-page-products';
-
-      // Repeated header on every single product page!
-      const pageHeader = headerTemplate.cloneNode(true);
-      pageEl.appendChild(pageHeader);
-
-      // Add the cards chunk for this page
-      const chunk = visibleCards.slice(i, i + PER_PAGE);
-      chunk.forEach(card=>{
-        const cardClone = card.cloneNode(true);
-        cardClone.removeAttribute('id');
-        cardClone.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
-        cardClone.querySelectorAll('.del-btn, .card-actions, .drag-handle, .img-upload-label').forEach(el=>el.remove());
-
-        const p1Input = card.querySelector('.price-input');
-        const p2Input = card.querySelector('.price2-input');
-        const c1Input = cardClone.querySelector('.price-input');
-        const c2Input = cardClone.querySelector('.price2-input');
-        if(p1Input && c1Input) c1Input.value = p1Input.value;
-        if(p2Input && c2Input) c2Input.value = p2Input.value;
-
-        pageEl.appendChild(cardClone);
-      });
-
-      pdfContainer.appendChild(pageEl);
-    }
-
-    document.body.appendChild(pdfContainer);
-    document.body.classList.add('exporting');
 
     const opt = {
       margin:       [6, 8, 6, 8],
       filename:     'لیست-قیمت-تامین-نهاده-ایران.pdf',
       image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true, logging: false },
+      html2canvas:  { scale: 2, useCORS: true },
       jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak:    { mode: ['css', 'legacy'], after: '.pdf-page' }
+      pagebreak:    { mode: ['css', 'legacy'] }
     };
 
-    try {
-      await html2pdf().set(opt).from(pdfContainer).save();
-    } catch(err){
+    html2pdf().set(opt).from(sheet).save().then(cleanup).catch((err)=>{
+      cleanup();
       alert('خطا در ساخت PDF: ' + err.message);
-    } finally {
-      pdfContainer.remove();
-      document.body.classList.remove('exporting');
-      exportBtn.disabled = false;
-      exportBtn.textContent = 'دریافت PDF';
-    }
+    });
   });
 </script>
 </body>
